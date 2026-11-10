@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation - Fondamentaux Programmatique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --success: #10b981;
+            --success-light: #ecfdf5;
+            --danger: #ef4444;
+            --danger-light: #fef2f2;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --bg-card: #ffffff;
+            --bg-body: #f8fafc;
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-content {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            background-color: var(--primary-light);
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .candidate-tag {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background-color: var(--bg-body);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            display: none;
+        }
+
+        main {
+            flex: 1;
+            max-width: 850px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .screen-intro h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+        }
+
+        .screen-intro p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.2s ease;
+            background-color: white;
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .rules-box {
+            background-color: var(--primary-light);
+            border: 1px solid #bfdbfe;
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: #1e40af;
+        }
+
+        .rules-box ul { padding-left: 1.25rem; margin-top: 0.5rem; }
+        .rules-box li { margin-bottom: 0.25rem; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary { background-color: var(--primary); color: white; }
+        .btn-primary:hover { background-color: var(--primary-dark); }
+        .btn-secondary { background-color: #f1f5f9; color: var(--text-main); border: 1px solid var(--border); }
+        .btn-secondary:hover { background-color: #e2e8f0; }
+        .btn-success { background-color: var(--success); color: white; }
+        .btn-success:hover { background-color: #059669; }
+
+        .nav-progress-wrapper { margin-bottom: 2rem; }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-bar-bg {
+            background-color: #f1f5f9;
+            height: 6px;
+            border-radius: 9999px;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(90deg, var(--primary) 0%, #3b82f6 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-matrix {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .matrix-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background-color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .matrix-btn.answered {
+            background-color: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .matrix-btn.current {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .module-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            background-color: var(--primary-light);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.45;
+            margin-bottom: 1.5rem;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem 1.25rem;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .option-item:hover {
+            border-color: #cbd5e1;
+            background-color: #f8fafc;
+        }
+
+        .option-item.selected {
+            border-color: var(--primary);
+            background-color: var(--primary-light);
+            box-shadow: 0 0 0 1px var(--primary);
+        }
+
+        .option-bullet {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #cbd5e1;
+            margin-right: 1rem;
+            margin-top: 0.15rem;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-item.selected .option-bullet {
+            border-color: var(--primary);
+        }
+
+        .option-item.selected .option-bullet::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
+
+        .option-label {
+            font-size: 0.95rem;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        .option-item.selected .option-label {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .nav-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+        }
+
+        .result-header {
+            text-align: center;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .result-badge {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.45rem 1.25rem;
+            border-radius: 9999px;
+            margin-bottom: 1rem;
+        }
+
+        .badge-passed {
+            background-color: var(--success-light);
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .badge-failed {
+            background-color: var(--danger-light);
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .score-display {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-sub { font-size: 1.15rem; color: var(--text-muted); font-weight: 500; }
+
+        .summary-card {
+            background-color: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .summary-item .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-item .val {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .sync-status-box {
+            background-color: #f8fafc;
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .sync-status-box.synced {
+            background-color: var(--success-light);
+            border-color: #a7f3d0;
+            color: #065f46;
+        }
+
+        .actions-bar {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div>
+                <div class="brand-badge">Onboarding Newbie · GMP</div>
+                <div class="header-title">Plateforme d'Évaluation Programmatique</div>
+            </div>
+            <div id="candidateTag" class="candidate-tag"></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- SCREEN 1: ACCUEIL & CHOIX DU MODULE -->
+        <div id="screenIntro" class="card screen-intro">
+            <h1>Évaluation par Module</h1>
+            <p>Sélectionnez le module à valider. Vos réponses et votre score seront enregistrés automatiquement pour le suivi manager.</p>
+
+            <div class="rules-box">
+                <strong>Conditions de passage :</strong>
+                <ul>
+                    <li>Évaluation composée de <strong>5 questions ciblées</strong> sur le module sélectionné.</li>
+                    <li>Aucune indication de bonne/mauvaise réponse n'est divulguée pendant ou après l'épreuve.</li>
+                    <li>Navigation libre entre les questions avant la validation finale.</li>
+                    <li><strong>Seuil de validation : 80% (soit 4/5 minimum)</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <label for="candidateName">Nom et Prénom de l'apprenant *</label>
+                <input type="text" id="candidateName" placeholder="Ex: Lucien RANDRIA" required>
+            </div>
+
+            <div class="form-group">
+                <label for="moduleSelect">Module à évaluer *</label>
+                <select id="moduleSelect" required>
+                    <option value="" disabled selected>-- Choisissez un module --</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%;" onclick="startQuiz()">
+                Démarrer l'évaluation du module
+            </button>
+        </div>
+
+        <!-- SCREEN 2: EXAM QUIZ -->
+        <div id="screenQuiz" class="card" style="display: none;">
+            <div class="nav-progress-wrapper">
+                <div class="progress-header">
+                    <span id="questionCounter">Question 1 sur 5</span>
+                    <span id="answeredCounter" style="color: var(--text-muted);">0 / 5 répondue(s)</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progressBar" class="progress-bar-fill"></div>
+                </div>
+                <div id="questionMatrix" class="question-matrix"></div>
+            </div>
+
+            <div class="module-tag" id="currentModuleTag">Module</div>
+            <div class="question-text" id="currentQuestionText">...</div>
+
+            <div class="options-list" id="optionsContainer"></div>
+
+            <div class="nav-actions">
+                <button class="btn btn-secondary" id="btnPrev" onclick="prevQuestion()">Précédent</button>
+                <div style="display: flex; gap: 0.75rem;">
+                    <button class="btn btn-secondary" id="btnNext" onclick="nextQuestion()">Suivant</button>
+                    <button class="btn btn-success" id="btnFinish" onclick="submitExam()" style="display: none;">Valider l'évaluation</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: RESULTATS CONFIDENTIELS & BOUTON ACCUEIL -->
+        <div id="screenResult" class="card" style="display: none;">
+            <div class="result-header">
+                <div id="statusBadge" class="result-badge">VALIDÉ</div>
+                <div class="score-display" id="scoreDisplay">0 / 5</div>
+                <div class="score-sub" id="scorePercent">0% de réussite</div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-item">
+                    <div class="label">Apprenant</div>
+                    <div class="val" id="resCandidate">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Module Validé</div>
+                    <div class="val" id="resModule">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Date & Heure</div>
+                    <div class="val" id="resDate">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Statut Seuil 80%</div>
+                    <div class="val" id="resValidation">--</div>
+                </div>
+            </div>
+
+            <div id="syncStatus" class="sync-status-box">
+                Enregistrement dans le suivi manager...
+            </div>
+
+            <div class="actions-bar">
+                <button class="btn btn-primary" onclick="goToHome()">
+                    🏠 Passer un autre module (Accueil)
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCRIPT DES QUESTIONS -->
+    <script src="questions.js"></script>
+
+    <script>
+        const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/a/macros/programmads.com/s/AKfycbzhx9bseULtHUZBTgh_WqrKRLovUW667GDYMyCLIRNALOIFBq-IxY6dBQlxXlzQ5paG/exec";
+
+        let activeQuestions = [];
+        let userAnswers = {};
+        let currentIndex = 0;
+        let candidate = "";
+        let selectedModule = "";
+
+        function loadModules() {
+            const moduleSelect = document.getElementById("moduleSelect");
+            if (!moduleSelect) return;
+
+            let modules = [
+                "Écosystème programmatique",
+                "Ciblage & audiences",
+                "Formats & créas",
+                "Tracking & mesure",
+                "Privacy, brand safety & qualité"
+            ];
+
+            if (window.ALL_QUESTIONS && Array.isArray(window.ALL_QUESTIONS)) {
+                modules = [...new Set(window.ALL_QUESTIONS.map(q => q.module))];
+            }
+
+            moduleSelect.innerHTML = '<option value="" disabled selected>-- Choisissez un module --</option>';
+            modules.forEach(modName => {
+                const opt = document.createElement("option");
+                opt.value = modName;
+                opt.textContent = modName;
+                moduleSelect.appendChild(opt);
+            });
+        }
+
+        window.addEventListener("DOMContentLoaded", loadModules);
+        window.addEventListener("load", loadModules);
+
+        function startQuiz() {
+            const nameInput = document.getElementById("candidateName");
+            const modSelect = document.getElementById("moduleSelect");
+
+            if (!nameInput.value.trim()) {
+                alert("Veuillez renseigner votre Prénom et Nom.");
+                nameInput.focus();
+                return;
+            }
+
+            if (!modSelect.value) {
+                alert("Veuillez sélectionner un module.");
+                modSelect.focus();
+                return;
+            }
+
+            if (!window.ALL_QUESTIONS || !window.ALL_QUESTIONS.length) {
+                alert("Erreur : le fichier questions.js n'a pas pu être chargé par le navigateur. Vérifiez votre connexion.");
+                return;
+            }
+
+            candidate = nameInput.value.trim();
+            selectedModule = modSelect.value;
+            activeQuestions = window.ALL_QUESTIONS.filter(q => q.module === selectedModule);
+
+            userAnswers = {};
+            currentIndex = 0;
+
+            document.getElementById("candidateTag").style.display = "block";
+            document.getElementById("candidateTag").textContent = `${candidate} (${selectedModule})`;
+
+            document.getElementById("screenIntro").style.display = "none";
+            document.getElementById("screenResult").style.display = "none";
+            document.getElementById("screenQuiz").style.display = "block";
+
+            renderMatrix();
+            loadQuestion(0);
+        }
+
+        function renderMatrix() {
+            const matrix = document.getElementById("questionMatrix");
+            matrix.innerHTML = "";
+            activeQuestions.forEach((q, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "matrix-btn";
+                btn.id = "matrix-btn-" + idx;
+                btn.textContent = idx + 1;
+                btn.onclick = () => loadQuestion(idx);
+                matrix.appendChild(btn);
+            });
+        }
+
+        function loadQuestion(index) {
+            currentIndex = index;
+            const q = activeQuestions[index];
+
+            document.getElementById("questionCounter").textContent = `Question ${index + 1} sur ${activeQuestions.length}`;
+            document.getElementById("currentModuleTag").textContent = q.module;
+            document.getElementById("currentQuestionText").textContent = q.question;
+
+            const container = document.getElementById("optionsContainer");
+            container.innerHTML = "";
+
+            q.options.forEach((optText, optIdx) => {
+                const div = document.createElement("div");
+                div.className = "option-item" + (userAnswers[q.id] === optIdx ? " selected" : "");
+                div.onclick = () => selectOption(q.id, optIdx);
+
+                div.innerHTML = `
+                    <div class="option-bullet"></div>
+                    <div class="option-label">${optText}</div>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById("btnPrev").disabled = (index === 0);
+            
+            if (index === activeQuestions.length - 1) {
+                document.getElementById("btnNext").style.display = "none";
+                document.getElementById("btnFinish").style.display = "inline-flex";
+            } else {
+                document.getElementById("btnNext").style.display = "inline-flex";
+                document.getElementById("btnFinish").style.display = "none";
+            }
+
+            updateProgress();
+        }
+
+        function selectOption(questionId, optionIndex) {
+            userAnswers[questionId] = optionIndex;
+            
+            const container = document.getElementById("optionsContainer");
+            Array.from(container.children).forEach((child, idx) => {
+                child.classList.toggle("selected", idx === optionIndex);
+            });
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const total = activeQuestions.length;
+            const answeredCount = Object.keys(userAnswers).length;
+
+            document.getElementById("answeredCounter").textContent = `${answeredCount} / ${total} répondue(s)`;
+            const percent = (answeredCount / total) * 100;
+            document.getElementById("progressBar").style.width = percent + "%";
+
+            activeQuestions.forEach((q, idx) => {
+                const btn = document.getElementById("matrix-btn-" + idx);
+                if (btn) {
+                    btn.classList.toggle("answered", userAnswers[q.id] !== undefined);
+                    btn.classList.toggle("current", idx === currentIndex);
+                }
+            });
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) loadQuestion(currentIndex - 1);
+        }
+
+        function nextQuestion() {
+            if (currentIndex < activeQuestions.length - 1) loadQuestion(currentIndex + 1);
+        }
+
+        function submitExam() {
+            calculateAndShowResults();
+        }
+
+        function calculateAndShowResults() {
+            let correctCount = 0;
+            const total = activeQuestions.length;
+            const answersDetails = [];
+
+            activeQuestions.forEach((q, idx) => {
+                const chosenIdx = userAnswers[q.id];
+                const isCorrect = (chosenIdx === q.correct);
+                if (isCorrect) correctCount++;
+
+                answersDetails.push({
+                    qIndex: idx + 1,
+                    question: q.question,
+                    chosenAnswer: chosenIdx !== undefined ? q.options[chosenIdx] : "Non répondu",
+                    correctAnswer: q.options[q.correct],
+                    isCorrect: isCorrect
+                });
+            });
+
+            const scorePercent = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+            const isPassed = scorePercent >= 80;
+            const now = new Date().toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' });
+
+            document.getElementById("screenQuiz").style.display = "none";
+            document.getElementById("screenResult").style.display = "block";
+
+            const badge = document.getElementById("statusBadge");
+            if (badge) {
+                badge.className = "result-badge " + (isPassed ? "badge-passed" : "badge-failed");
+                badge.textContent = isPassed ? "STATUT : VALIDÉ (REÇU)" : "STATUT : NON VALIDÉ (À RETRAVAILLER)";
+            }
+
+            const scoreDisplay = document.getElementById("scoreDisplay");
+            if (scoreDisplay) scoreDisplay.textContent = `${correctCount} / ${total}`;
+
+            const scorePercentEl = document.getElementById("scorePercent");
+            if (scorePercentEl) scorePercentEl.textContent = `${scorePercent}% de réussite (Seuil requis : 80%)`;
+
+            const resCandidate = document.getElementById("resCandidate");
+            if (resCandidate) resCandidate.textContent = candidate;
+
+            const resModule = document.getElementById("resModule");
+            if (resModule) resModule.textContent = selectedModule;
+
+            const resDate = document.getElementById("resDate");
+            if (resDate) resDate.textContent = now;
+
+            const resValidation = document.getElementById("resValidation");
+            if (resValidation) resValidation.textContent = isPassed ? "Acquis (≥80%)" : "Non acquis (<80%)";
+
+            try {
+                saveResultsToGoogleSheet({
+                    date: now,
+                    candidate: candidate,
+                    module: selectedModule,
+                    score: `${correctCount}/${total}`,
+                    percent: `${scorePercent}%`,
+                    status: isPassed ? "VALIDÉ" : "NON VALIDÉ",
+                    details: answersDetails
+                });
+            } catch (err) {
+                console.warn("Erreur locale :", err);
+            }
+        }
+
+        function saveResultsToGoogleSheet(data) {
+            const syncBox = document.getElementById("syncStatus");
+            if (!syncBox) return;
+
+            if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes("example")) {
+                syncBox.innerHTML = "✓ Évaluation terminée.";
+                syncBox.className = "sync-status-box synced";
+                return;
+            }
+
+            syncBox.textContent = "Enregistrement dans le suivi manager...";
+
+            fetch(GOOGLE_SHEET_WEBAPP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                syncBox.innerHTML = "✓ Évaluation transmise au tableau de bord.";
+                syncBox.className = "sync-status-box synced";
+            })
+            .catch(() => {
+                syncBox.innerHTML = "✓ Évaluation terminée.";
+                syncBox.className = "sync-status-box synced";
+            });
+        }
+
+        function goToHome() {
+            document.getElementById("screenResult").style.display = "none";
+            document.getElementById("screenQuiz").style.display = "none";
+            document.getElementById("screenIntro").style.display = "block";
+
+            document.getElementById("moduleSelect").value = "";
+            document.getElementById("candidateTag").style.display = "none";
+        }
+    </script>
+</body>
+</html>
