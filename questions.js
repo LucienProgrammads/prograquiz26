@@ -1,351 +1,326 @@
 /**
- * BANQUE DE QUESTIONS DU QUIZ PROGRAMMATIQUE (MODULAIRE)
- * 5 modules x 5 questions = 25 questions professionnelles
+ * BANQUE DE QUESTIONS - MISES EN SITUATION OPÉRATIONNELLES (PROGRAMMADS)
+ * 5 modules x 5 cas concrets = 25 questions pratiques
  */
 
 window.ALL_QUESTIONS = [
   // ==========================================
-  // MODULE 1 : Écosystème programmatique (5 questions)
+  // MODULE 1 : Écosystème programmatique (Cas opérationnels)
   // ==========================================
   {
     id: 1,
     module: "Écosystème programmatique",
-    question: "Dans l'écosystème programmatique, quelle est la fonction principale d'une SSP (Supply-Side Platform) lors de la mise aux enchères d'une impression ?",
+    question: "En tant que trader chez Programmads, vous lancez une campagne sur DV360 en enchères ouvertes (Open Auction), mais votre Line Item ne délivre quasiment aucune impression malgré une audience large. Quel réglage prioritaire inspectez-vous sur votre configuration d'enchère ?",
     options: [
-      "Agréger l'inventaire des éditeurs et maximiser leur yield",
-      "Gérer et optimiser les budgets des annonceurs",
-      "Héberger et auditer les créatives dynamiques",
-      "Mesurer la conversion post-clic sur le site marchand"
+      "Le Floor Price (prix plancher) fixé par les éditeurs côté SSP, qui est probablement supérieur à votre CPM max configuré",
+      "Le protocole HTTP de l'ad server de l'annonceur qui refuse les connexions sécurisées",
+      "Le quota de bande passante alloué au DSP sur le réseau local de l'agence",
+      "Le paramètre de géolocalisation qui exige une validation manuelle par l'ARCOM"
     ],
-    correct: 0,
-    explanation: "La SSP (Supply-Side Platform) permet aux éditeurs de monétiser leurs espaces et d'optimiser leur yield management."
+    correct: 0
   },
   {
     id: 2,
     module: "Écosystème programmatique",
-    question: "Quel type de transaction programmatique engage à la fois l'acheteur sur un volume d'impressions précis et l'éditeur sur un prix fixe réservé ?",
+    question: "Un client premium souhaite sécuriser un emplacement exclusif 'Habillage desktop' sur un site média majeur pour le lancement d'un produit vendredi prochain, avec obligation de délivrer 500 000 impressions à 12 € du CPM. Quel type d'achat devez-vous impérativement négocier avec la régie ?",
     options: [
-      "Open Auction (Enchères ouvertes)",
-      "Private Marketplace (PMP)",
-      "Preferred Deal",
-      "Programmatic Guaranteed"
+      "Un Programmatic Guaranteed (PG) validé entre le DSP et la SSP de la régie",
+      "Un Preferred Deal sans engagement de volume sur l'Open RTB",
+      "Une enchère privée (Private Marketplace) avec un plancher souple",
+      "Une campagne standard en Open Auction avec un bid multiplier x5"
     ],
-    correct: 3,
-    explanation: "Le Programmatic Guaranteed (PG) engage les deux parties sur un volume garanti et un CPM fixe."
+    correct: 0
   },
   {
     id: 3,
     module: "Écosystème programmatique",
-    question: "Quelle est la principale différence entre une enchère au premier prix (First-Price Auction) et au second prix (Second-Price Auction) ?",
+    question: "Sur un audit financier de vos campagnes display, vous remarquez que le CPM moyen net facturé est passé de 2,10 € à 3,40 € suite au passage généralisé du marché au First-Price Auction. Comment expliquez-vous cette hausse à votre responsable de compte ?",
     options: [
-      "Au premier prix, l'acheteur paie le montant exact de son offre ; au second prix, il paie l'offre immédiatement inférieure + 0,01 €",
-      "Le premier prix est réservé exclusivement aux formats vidéo",
-      "Le second prix ne s'applique que dans le cadre des Preferred Deals",
-      "Au premier prix, l'éditeur ne perçoit aucune commission de la part du SSP"
+      "En First-Price, le DSP paie exactement le montant de l'offre soumise ; il faut calibrer des algorithmes de Bid Shading pour éviter de surpayer",
+      "En First-Price, la régie média applique systématiquement une taxe de 30% sur chaque clic sortant",
+      "Les ad servers facturent désormais le double pour stocker les créatives au format responsive",
+      "Le Second-Price forçait le DSP à enchérir 1 centime de plus que son budget journalier total"
     ],
-    correct: 0,
-    explanation: "Dans le First-Price Auction, le gagnant paie son bid exact, contrairement au Second-Price historique (bid n°2 + 0.01$)."
+    correct: 0
   },
   {
     id: 4,
     module: "Écosystème programmatique",
-    question: "Dans le protocole OpenRTB, que représente la requête 'bid request' envoyée par la SSP au DSP ?",
+    question: "Durant la phase de test d'un deal direct avec Le Figaro, la régie vous indique qu'elle envoie bien les impressions vers votre Seat DSP, mais vous ne voyez aucune requête dans vos logs. Que devez-vous demander en priorité à la régie pour débloquer la situation ?",
     options: [
-      "L'opportunité d'enchérir sur une impression disponible avec les métadonnées de l'utilisateur et de la page",
-      "La facture mensuelle consolidée des impressions délivrées",
-      "La notification confirmant que la créative a été validée par l'ad server",
-      "L'ordre de virement bancaire entre l'annonceur et l'éditeur"
+      "Le Deal ID exact configuré dans la SSP et l'ID de votre compte DSP (Seat ID) pour valider l'association technique",
+      "Le nom de domaine complet du registrar du site web de l'éditeur",
+      "Une copie du contrat commercial signé avec le syndicat des éditeurs",
+      "L'adresse IP publique de la machine du responsable de régie"
     ],
-    correct: 0,
-    explanation: "La Bid Request contient toutes les informations contextuelles, techniques et d'audience permettant au DSP de décider s'il enchérit et à quel prix."
+    correct: 0
   },
   {
     id: 5,
     module: "Écosystème programmatique",
-    question: "Quel rôle joue le Header Bidding par rapport au modèle traditionnel en cascade (Waterfall) ?",
+    question: "Un éditeur média partenaire passe son architecture de monétisation du Waterfall classique au Header Bidding (Prebid). Quel bénéfice direct constatez-vous côté acheteur lors de la diffusion de vos campagnes ?",
     options: [
-      "Il permet à plusieurs SSPs d'enchérir simultanément et équitablement avant l'appel à l'ad server primaire",
-      "Il empêche les DSPs d'accéder aux cookies 1st party des éditeurs",
-      "Il supprime totalement le besoin d'un ad server pour l'éditeur",
-      "Il force l'achat d'espaces display uniquement en programmatique garanti"
+      "Un accès simultané et équitable à 100% de l'inventaire en temps réel, sans passer après les deals prioritaires de l'ad server primaire",
+      "La disparition définitive de tous les formats publicitaires interstitiels sur mobile",
+      "L'obligation de payer les factures en cryptomonnaie directement au DSP",
+      "Une garantie contractuelle que le taux de visibilité sera toujours supérieur à 95%"
     ],
-    correct: 0,
-    explanation: "Le Header Bidding met en concurrence simultanée toutes les sources d'achat avant que l'ad server de l'éditeur ne prenne sa décision finale."
+    correct: 0
   },
 
   // ==========================================
-  // MODULE 2 : Ciblage & audiences (5 questions)
+  // MODULE 2 : Ciblage & audiences (Cas opérationnels)
   // ==========================================
   {
     id: 6,
     module: "Ciblage & audiences",
-    question: "Dans une stratégie de prospection en haut de funnel sans cookies tiers, quel levier d'audience est le plus pertinent ?",
+    question: "Une marque de prêt-à-porter de luxe refuse d'apparaître sur les navigateurs où les cookies tiers sont restreints (Safari, Firefox), mais souhaite acquérir de nouveaux clients sans recycler sa base CRM. Quelle alternative d'audience recommandez-vous ?",
     options: [
-      "Le ciblage contextuel sémantique avancé",
-      "Le remarketing des paniers abandonnés",
-      "L'exclusion des clients 1st party existants uniquement",
-      "Une audience similaire basée sur la liste d'acheteurs récents via cookies tiers"
+      "Un ciblage contextuel sémantique basé sur le contenu des pages mode/tendances combiné aux ID alternatifs (Universal ID)",
+      "Une campagne de retargeting dynamique sur les visiteurs n'ayant pas finalisé leur commande",
+      "Un ciblage par exclusion stricte de toutes les adresses IP résidentielles en France",
+      "Un Line Item ciblant uniquement les personnes inscrites à la newsletter depuis moins de 48 heures"
     ],
-    correct: 0,
-    explanation: "Le ciblage contextuel analyse la thématique de la page visitée en temps réel sans nécessiter de traceurs ni identifiants tiers."
+    correct: 0
   },
   {
     id: 7,
     module: "Ciblage & audiences",
-    question: "Quel est l'impact direct de la configuration d'un frequency capping au niveau d'un line item en DSP ?",
+    question: "Lors d'un point hebdomadaire, votre client se plaint : 'Mes collègues et moi voyons notre propre publicité 15 fois par jour sur les mêmes sites média !'. Quelle correction technique appliquez-vous immédiatement sur le DSP ?",
     options: [
-      "Restreindre le nombre d'expositions publicitaires par internaute unique sur une fenêtre de temps donnée",
-      "Augmenter systématiquement l'enchère maximale en fin de journée",
-      "Garantir un taux de visibilité minimum de 70% sur l'inventaire acheté",
-      "Bloquer la diffusion sur les appareils mobiles connectés en Wi-Fi"
+      "Resserrer le Frequency Capping à 2 ou 3 impressions par internaute unique par 24 heures au niveau du Line Item",
+      "Augmenter le budget quotidien pour diluer les impressions sur l'ensemble du territoire",
+      "Désactiver immédiatement tous les formats bannières 300x250",
+      "Supprimer les listes d'exclusion de domaines dans les paramètres de marque"
     ],
-    correct: 0,
-    explanation: "Le frequency capping évite la surexposition publicitaire en limitant le nombre d'impressions par utilisateur."
+    correct: 0
   },
   {
     id: 8,
     module: "Ciblage & audiences",
-    question: "Comment définit-on une audience 'First-Party' (1st party data) dans une stratégie programmatique ?",
+    question: "Pour optimiser le ROAS d'un site d'assurance en ligne, vous devez segmenter votre audience First-Party issue du CRM. Quelle structure de listes d'audience est la plus efficace pour générer de nouveaux souscripteurs ?",
     options: [
-      "Les données collectées directement par la marque auprès de ses propres clients et visiteurs (CRM, site, app)",
-      "Les segments d'audience achetés auprès de courtiers de données externes (data brokers)",
-      "Les listes d'exclusion de mots-clés fournies par les régies publicitaires",
-      "Les profils socio-démographiques standard modélisés par le DSP"
+      "Exclure la liste des clients déjà assurés et créer un segment Lookalike (jumeaux statistiques) à partir des clients à plus haute valeur",
+      "Cibler exclusivement la liste complète des clients déjà détenteurs d'un contrat",
+      "Mélanger les profils inactifs et les prospects chauds sans appliquer d'enchère différenciée",
+      "Désactiver l'exclusion des convertis récents pour maximiser le nombre d'impressions servies"
     ],
-    correct: 0,
-    explanation: "La 1st party data est la donnée propriétaire directe appartenant à l'annonceur (CRM, analytics, transactions)."
+    correct: 0
   },
   {
     id: 9,
     module: "Ciblage & audiences",
-    question: "Dans le cadre d'une campagne de remarketing dynamique, quelle condition technique est indispensable côté site annonceur ?",
+    question: "Votre campagne de remarketing dynamique affiche un taux de clic anormalement bas et des créatives génériques sans image produit. En analysant la page de confirmation du site client, que découvrez-vous comme anomalie ?",
     options: [
-      "Avoir implémenté des balises de tracking (pixels) passant dynamiquement les identifiants de produits consultés",
-      "Désactiver complètement le bandeau de consentement aux cookies (CMP)",
-      "Acheter obligatoirement des deals privés avec les éditeurs média",
-      "Limiter la diffusion aux formats bannières 300x250 exclusivement"
+      "Les variables du pixel (Product ID / Category) sont vides ou renvoient la valeur 'undefined' dans le flux de données",
+      "Le site du client utilise un protocole HTTPS récent au lieu d'une connexion standard HTTP",
+      "Le catalogue de produits du client contient plus de 10 références actives",
+      "Le gestionnaire de balises Google Tag Manager est déclenché sur toutes les pages"
     ],
-    correct: 0,
-    explanation: "Le remarketing dynamique exige la remontée des IDs produits (via Floodlight/Pixel DSP) pour reconstituer la créa personnalisée."
+    correct: 0
   },
   {
     id: 10,
     module: "Ciblage & audiences",
-    question: "Quelle est la principale caractéristique d'une modélisation d'audience de type 'Lookalike' (audience similaire) ?",
+    question: "Vous construisez une audience similaire (Lookalike) sur un DSP. Pour obtenir un volume important d'impressions lors d'une campagne de notoriété massive, quel curseur d'élargissement devez-vous choisir ?",
     options: [
-      "Elle identifie de nouveaux profils présentant des comportements et attributs similaires à un segment source (seed)",
-      "Elle cible uniquement les anciens acheteurs inactifs depuis plus de 6 mois",
-      "Elle diffuse l'annonce uniquement sur les moteurs de recherche payants",
-      "Elle garantit un taux de conversion 100% supérieur aux audiences socio-démographiques"
+      "Privilégier la 'Portée' (Reach / 5% à 10%) plutôt que la 'Similarité stricte' (1%), quitte à accepter une précision comportementale moindre",
+      "Régler la similarité sur 0,1% pour forcer l'algorithme à n'admettre que des clones parfaits",
+      "Ajouter une liste d'exclusion géographique sur l'ensemble du pays hôte",
+      "Forcer une enchère au clic (CPC) à 0,01 € sans ciblage d'inventaire"
     ],
-    correct: 0,
-    explanation: "L'algorithme de lookalike prend une base seed (ex: meilleurs clients) et recherche des jumeaux statistiques parmi les internautes."
+    correct: 0
   },
 
   // ==========================================
-  // MODULE 3 : Formats & créas (5 questions)
+  // MODULE 3 : Formats & créas (Cas opérationnels)
   // ==========================================
   {
     id: 11,
     module: "Formats & créas",
-    question: "Quel format publicitaire est le plus adapté pour générer de l'engagement qualifié en milieu de funnel (Considération) avec une forte immersion de marque ?",
+    question: "Un annonceur automobile veut lancer une campagne vidéo pour faire découvrir son nouveau SUV. Le budget est modéré et il n'a pas accès à des inventaires YouTube réservés. Quel format vidéo devez-vous privilégier pour diffuser au cœur des articles de presse auto ?",
     options: [
-      "Format vidéo Outstream ou Native interactif au cœur de l'article",
-      "Bannière display classique 300x250 statique en bas de page",
-      "Tag d'audit invisible 1x1 d'impression",
-      "Notification push sponsorisée textuelle"
+      "Format vidéo Outstream (In-article ou In-feed) qui se déclenche silencieusement au scroll du lecteur",
+      "Format vidéo Instream Pre-roll exclusif de 60 secondes non skippable",
+      "Bannière animée GIF de 15 secondes en format 120x600 skyscraper",
+      "Format Audio digital diffusé sur les applications de podcasts"
     ],
-    correct: 0,
-    explanation: "L'Outstream et les formats interactifs offrent une immersion forte au sein du contenu éditorial pour travailler la considération."
+    correct: 0
   },
   {
     id: 12,
     module: "Formats & créas",
-    question: "Lors du contrôle qualité (QA) d'une créative HTML5 pour du Display programmatique, quelle anomalie technique justifie un refus immédiat de conformité ?",
+    question: "L'ad server du DSP rejette le zip HTML5 fourni par le graphiste avec l'erreur : 'ClickTag issue detected'. En inspectant le fichier index.html de l'archive, quelle ligne de code est la cause du rejet ?",
     options: [
-      "L'utilisation d'une balise clickTag codée en dur vers une URL fixe sans variable dynamique",
-      "Le respect d'un poids initial compressé inférieur à 150 Ko",
-      "L'intégration d'une boucle d'animation limitée à 30 secondes",
-      "L'appel à des polices sécurisées hébergées en HTTPS"
+      "window.open('https://www.site-annonceur.com') codé en dur sans passer par la variable window.clickTag",
+      "window.open(window.clickTag, '_blank') correctement déclaré dans la balise de clic",
+      "Une balise standard <canvas> utilisée pour exécuter une transition graphique CSS",
+      "L'insertion d'une balise meta viewport paramétrée à width=device-width"
     ],
-    correct: 0,
-    explanation: "Le clickTag doit être dynamique pour que le DSP et l'ad server puissent injecter leurs URLs de comptabilisation de clics."
+    correct: 0
   },
   {
     id: 13,
     module: "Formats & créas",
-    question: "Quelle est la spécificité d'une vidéo publicitaire de type 'Instream' comparée à une vidéo 'Outstream' ?",
+    question: "Vous achetez un inventaire vidéo Instream sur une place de marché privée. Le rapport de diffusion indique 100 000 impressions servies mais un taux de visibilité (Viewability) de seulement 32%. Quelle est l'explication la plus probable ?",
     options: [
-      "L'Instream est diffusé au sein d'un lecteur vidéo existant (Pre-roll, Mid-roll, Post-roll) avec un flux de contenu vidéo",
-      "L'Instream s'insère uniquement entre deux paragraphes de texte sans flux vidéo sous-jacent",
-      "L'Instream ne peut jamais être skippé par l'internaute",
-      "L'Instream ne requiert aucun fichier vidéo MP4 hébergé"
+      "Le lecteur vidéo démarre en arrière-plan sous la ligne de flottaison sans que l'internaute n'ait le player visible à l'écran",
+      "La vidéo a été encodée au format MP4 haute résolution au lieu du format WebM",
+      "Les utilisateurs ont branché des écouteurs filaires sur leur ordinateur",
+      "Le DSP a automatiquement converti la vidéo en format texte pour accélérer le chargement"
     ],
-    correct: 0,
-    explanation: "L'Instream est incorporé à un lecteur diffusant du contenu vidéo (ex: YouTube, replay), alors que l'Outstream naît dans une page sans lecteur natif."
+    correct: 0
   },
   {
     id: 14,
     module: "Formats & créas",
-    question: "Que préconisent les normes IAB / Coalition for Better Ads concernant les vidéos publicitaires sur ordinateur et mobile ?",
+    question: "L'équipe créa vous soumet une maquette vidéo mobile qui démarre automatiquement avec le son à 100% et qui masque tout l'écran sans bouton de fermeture pendant 15 secondes. Que devez-vous leur notifier avant validation ?",
     options: [
-      "Démarrage en autoplay sans le son (muted) avec activation manuelle par l'utilisateur",
-      "Lecture automatique avec le volume sonore au niveau maximal",
-      "Interdiction formelle de proposer un bouton 'Fermer' avant 30 secondes",
-      "Obligation d'occuper au minimum 90% de la surface de l'écran dès l'arrivée sur la page"
+      "Cette créative enfreint les standards de la Coalition for Better Ads et sera bloquée par Chrome et les DSP tiers",
+      "Cette créative est parfaitement conforme et obtiendra un VTR de 100% sur tous les terminaux",
+      "Il suffit d'ajouter un logo de l'agence en filigrane pour lever toute restriction technique",
+      "Ce format est réservé aux sites d'information publique avec dérogation ministérielle"
     ],
-    correct: 0,
-    explanation: "Les standards IAB et Better Ads imposent l'autoplay silencieux (muted) pour préserver l'expérience utilisateur."
+    correct: 0
   },
   {
     id: 15,
     module: "Formats & créas",
-    question: "Quelle dimension correspond au format standard IAB 'Megabannière' (Leaderboard) très répandu en Display desktop ?",
+    question: "Pour une activation desktop à fort impact sur les pages d'accueil des portails médias français, quel pack de formats IAB devez-vous impérativement exiger du studio créatif ?",
     options: [
-      "728 x 90 pixels",
-      "300 x 600 pixels",
-      "300 x 250 pixels",
-      "160 x 600 pixels"
+      "Megabannière (728x90) ou Billboard (970x250) accompagné du Pavé (300x250) et Demi-Page (300x600)",
+      "Vignette 1x1, Favicon dynamique et Bannière mobile 320x50",
+      "Carrousel d'images 1080x1920 vertical exclusivement adapté aux Stories",
+      "Notification push riche au format brut JSON"
     ],
-    correct: 0,
-    explanation: "Le format 728x90 est le Leaderboard classique standardisé par l'IAB."
+    correct: 0
   },
 
   // ==========================================
-  // MODULE 4 : Tracking & mesure (5 questions)
+  // MODULE 4 : Tracking & mesure (Cas opérationnels)
   // ==========================================
   {
     id: 16,
     module: "Tracking & mesure",
-    question: "Quelle est la différence fondamentale entre un tag Floodlight (ad server) et un paramètre UTM standard ?",
+    question: "Votre client compare les résultats de sa campagne programmatique : Google Analytics (GA4) n'enregistre que 12 conversions (en attribution dernier clic direct), tandis que Campaign Manager 360 en attribue 140. Comment justifiez-vous cet écart sans paniquer le client ?",
     options: [
-      "Le tag Floodlight permet la déduplication et l'attribution post-view au sein de l'ad server, contrairement à l'UTM",
-      "L'UTM permet de mesurer les impressions publicitaires sans aucun clic",
-      "Le Floodlight ne fonctionne que sur les campagnes payantes du Search Google",
-      "L'UTM dépose un cookie tiers sécurisé sur le navigateur pour 90 jours"
+      "CM360 mesure l'attribution post-view (conversions après exposition sans clic direct), que GA4 ne peut pas voir par défaut via de simples balises UTM",
+      "Google Analytics a subi une panne technique générale et supprime aléatoirement 90% des ventes",
+      "Le DSP a compté 10 fois chaque clic par erreur de facturation automatique",
+      "Les paramètres UTM ont été volontairement falsifiés par les régies publicitaires"
     ],
-    correct: 0,
-    explanation: "Le tag Floodlight (Google Marketing Platform) permet d'attribuer des conversions post-clic ET post-view dédupliquées."
+    correct: 0
   },
   {
     id: 17,
     module: "Tracking & mesure",
-    question: "Dans quel cas précis une conversion est-elle qualifiée d'attribution 'post-view' (ou post-impression) ?",
+    question: "Sur un site e-commerce avec un panier moyen à 800 €, le cycle d'achat dure en moyenne 18 jours entre la première visite et la validation finale. Quelle configuration de fenêtre d'attribution devez-vous recommander dans l'Ad Server ?",
     options: [
-      "L'internaute a été exposé à une impression publicitaire, n'a pas cliqué, mais a converti sur le site dans la fenêtre d'attribution",
-      "L'internaute a cliqué sur la bannière puis a validé un achat sous 24 heures",
-      "La conversion provient exclusivement d'une recherche naturelle sur Google",
-      "La vidéo publicitaire a été visionnée à 100% sans générer de visite sur le site"
+      "Une fenêtre post-clic d'au moins 30 jours et une fenêtre post-view resserrée (ex: 24h à 7 jours) pour ne valoriser que l'impact récent",
+      "Une fenêtre d'attribution de 5 minutes chrono pour éliminer toute influence de la marque",
+      "Une fenêtre post-view de 365 jours pour attribuer systématiquement toutes les ventes de l'année",
+      "Désactiver l'attribution pour ne mesurer que les impressions servies sans lien avec les ventes"
     ],
-    correct: 0,
-    explanation: "L'attribution post-view mesure l'impact mémoriel d'une impression vue sans clic direct."
+    correct: 0
   },
   {
     id: 18,
     module: "Tracking & mesure",
-    question: "Selon la norme IAB / MRC, à quelle condition une impression Display desktop est-elle considérée comme 'visible' (Viewable) ?",
+    question: "Dans le bilan de visibilité (MRC) d'une campagne display desktop, un Line Item affiche un taux de visibilité décevant de 28%. Selon les normes officielles IAB / MRC, que signifie ce chiffre concrètement ?",
     options: [
-      "Au moins 50% de la surface de la bannière est visible à l'écran pendant au moins 1 seconde continue",
-      "100% de la surface est visible pendant 3 secondes consécutives",
-      "La bannière a généré au moins un clic valide de la part de l'utilisateur",
-      "La page a été chargée entièrement jusqu'au pied de page (footer)"
+      "Seulement 28% des impressions servies ont eu au moins 50% de leurs pixels visibles à l'écran pendant 1 seconde continue",
+      "La publicité n'a été cliquée que par 28 internautes sur l'ensemble de la campagne",
+      "Les serveurs de l'ad server ont rejeté 72% des appels publicitaires pour contenu illégal",
+      "28% des visiteurs ont visionné l'intégralité d'un diaporama de 10 diapositives"
     ],
-    correct: 0,
-    explanation: "Le standard MRC/IAB pour le Display est : 50% des pixels visibles pendant au moins 1 seconde continue (2 secondes pour la vidéo)."
+    correct: 0
   },
   {
     id: 19,
     module: "Tracking & mesure",
-    question: "Quel est l'objectif principal d'un modèle d'attribution algorithmique (Data-Driven Attribution) par rapport au modèle 'Dernier Clic' (Last Interaction) ?",
+    question: "Un directeur marketing souhaite abandonner le modèle d'attribution 'Dernier Clic' (Last Interaction) au profit d'un modèle algorithmique 'Data-Driven' sur ses campagnes cross-canal. Quel sera l'impact visible immédiat pour vos campagnes Display programmatiques de haut de tunnel ?",
     options: [
-      "Répartir équitablement la valeur de la conversion entre chaque point de contact du parcours d'achat selon son influence réelle",
-      "Attribuer 100% de la valeur de la vente à la toute première bannière vue",
-      "Ignorer complètement les clics pour ne mesurer que les impressions d'arrière-plan",
-      "Supprimer l'obligation de poser des tags de tracking sur les pages de paiement"
+      "Le Display programmatique verra sa valeur réhaussée car le modèle attribue une part de crédit aux points de contact initiateurs du parcours d'achat",
+      "Toutes les conversions seront automatiquement réattribuées aux annonces Search marque à 100%",
+      "Le coût par clic de la campagne augmentera immédiatement de 50%",
+      "Les balises de conversion sur le site de l'annonceur cesseront de comptabiliser les montants d'achat"
     ],
-    correct: 0,
-    explanation: "Le modèle Data-Driven analyse l'ensemble des chemins avec et sans conversion pour pondérer statistiquement chaque point de contact."
+    correct: 0
   },
   {
     id: 20,
     module: "Tracking & mesure",
-    question: "Que mesure le KPI 'VTR' (View-Through Rate) dans une campagne vidéo programmatique ?",
+    question: "En optimisant une campagne vidéo pour un service de streaming, vous constatez un VTR (View-Through Rate / Taux de complétion vidéo) exceptionnel de 85% mais un taux de rebond de 95% sur le site d'atterrissage. Quel est le diagnostic le plus lucide ?",
     options: [
-      "Le ratio entre le nombre de vidéos complétées (à 100%) et le nombre d'impressions servies",
-      "Le taux de clics généré par seconde de lecture",
-      "Le coût moyen facturé par visiteur unique sur le site web",
-      "Le pourcentage de vidéos lancées avec le son activé"
+      "La vidéo captive ou est diffusée sur des formats non skippables (bons visionnages), mais la promesse créative ou la landing page ne convertit pas l'intention",
+      "L'ad server a comptabilisé les vidéos en boucle sur le serveur de preview interne de l'agence",
+      "Les internautes ont tous désactivé leur connexion Internet après 10 secondes de lecture",
+      "Le pixel de tracking Floodlight a été installé à l'envers sur la page d'accueil"
     ],
-    correct: 0,
-    explanation: "Le VTR (ou Video Completion Rate) correspond au nombre de vidéos visionnées jusqu'au terme divisé par le nombre total d'impressions vidéo."
+    correct: 0
   },
 
   // ==========================================
-  // MODULE 5 : Privacy, brand safety & qualité (5 questions)
+  // MODULE 5 : Privacy, brand safety & qualité (Cas opérationnels)
   // ==========================================
   {
     id: 21,
     module: "Privacy, brand safety & qualité",
-    question: "En Europe (RGPD), quel est l'impact direct du Transparency and Consent Framework (TCF v2.2) sur la diffusion d'une campagne programmatique ?",
+    question: "Suite à la mise à jour d'un bandeau de consentement (CMP) aux normes TCF v2.2 sur un média partenaire, vous constatez que votre DSP n'envoie plus aucune enchère sur ses pages. Que vérifiez-vous en priorité dans la chaîne TC String reçue ?",
     options: [
-      "Il conditionne la transmission de la chaîne de consentement (TC String) dans l'appel d'offre aux DSP et vendors autorisés",
-      "Il impose un prix plancher fixe sur l'ensemble des enchères RTB ouvertes",
-      "Il supprime automatiquement les formats publicitaires vidéo non skippables",
-      "Il interdit formellement l'utilisation de tout ciblage géographique par pays"
+      "Si l'utilisateur a donné son consentement pour la Finalité 1 (Purpose 1 : Stockage / accès aux traceurs) et si votre DSP fait bien partie de la liste des vendors autorisés",
+      "Si la police d'écriture du bandeau de consentement est bien une typographie officielle Google Fonts",
+      "Si le bouton 'Accepter' a été cliqué depuis un appareil mobile situé en dehors de l'Union Européenne",
+      "Si l'éditeur a payé sa cotisation annuelle à l'IAB Europe avant le 1er du mois"
     ],
-    correct: 0,
-    explanation: "La TC String générée par la CMP conforme TCF v2.2 transmet les consentements explicites accordés aux différentes finalités et prestataires."
+    correct: 0
   },
   {
     id: 22,
     module: "Privacy, brand safety & qualité",
-    question: "Dans le cadre de la brand safety et du filtrage d'inventaire, quelle solution permet d'éviter la diffusion sur des articles traitant de sujets sensibles ou anxiogènes ?",
+    question: "Une compagnie aérienne cliente chez Programmads vous alerte : un crash aérien vient de se produire et fait la une de l'actualité. Quelles mesures d'urgence de Brand Suitability devez-vous déployer dans l'heure sur le DSP ?",
     options: [
-      "L'utilisation de listes d'exclusion de mots-clés sémantiques et de segments contextuels négatifs (Brand Suitability)",
-      "L'augmentation du frequency capping journalier par internaute",
-      "Le ciblage exclusif des réseaux sociaux privés",
-      "Le passage obligatoire en enchères au second prix"
+      "Activer une liste noire contextuelle d'urgence (mots-clés : crash, accident, victime, avion) et exclure la catégorie sémantique 'Catastrophes aériennes' via un outil tiers (IAS / DoubleVerify)",
+      "Diminuer les enchères de 10% sur l'ensemble des sites de voyage",
+      "Créer une nouvelle bannière publicitaire avec un message promotionnel sur les billets d'avion",
+      "Basculer toutes les impressions en enchères ouvertes au second prix"
     ],
-    correct: 0,
-    explanation: "Les technologies de Brand Suitability (IAS, DoubleVerify, Oracle/Moat) analysent le contenu contextuel pour bloquer les environnements à risque."
+    correct: 0
   },
   {
     id: 23,
     module: "Privacy, brand safety & qualité",
-    question: "Quel fichier public placé à la racine du domaine d'un éditeur (ex: site.com/ads.txt) certifie les vendeurs autorisés à commercialiser son inventaire ?",
+    question: "Avant de lancer un investissement important de 50 000 € sur le site d'un nouvel éditeur influent, vous inspectez l'URL 'site-editeur.com/ads.txt'. Le fichier renvoie une erreur 404 (introuvable). Quel risque encourez-vous si vous achetez quand même cet inventaire sur le DSP ?",
     options: [
-      "ads.txt (Authorized Digital Sellers)",
-      "robots.txt",
-      "sitemap.xml",
-      "sellers.json"
+      "Acheter de l'inventaire frauduleux issu d'un faux domaine (Domain Spoofing) vendu par des intermédiaires non autorisés par le véritable propriétaire du site",
+      "Être poursuivi pénalement pour non-respect des droits d'auteur des photos publiées",
+      "Provoquer le blocage automatique de l'ensemble de votre compte bancaire par Stripe",
+      "Voir toutes les créatives de l'agence transformées en pages blanches par les navigateurs"
     ],
-    correct: 0,
-    explanation: "Le standard ads.txt permet aux acheteurs de vérifier que le vendeur/SSP a le droit légitime de vendre l'inventaire de ce média."
+    correct: 0
   },
   {
     id: 24,
     module: "Privacy, brand safety & qualité",
-    question: "Quelle forme de trafic invalide (IVT) relève du 'Sophisticated Invalid Traffic' (SIVT) par opposition au 'General Invalid Traffic' (GIVT) ?",
+    question: "Sur un Line Item d'Open Auction, un outil d'audit (IAS ou Moat) détecte 42% de trafic invalide sophistiqué (SIVT) sur une application mobile de lampe torche. Quelles sont les caractéristiques réelles de ce trafic ?",
     options: [
-      "Des botnets sophistiqués imitant le comportement humain et des fraudes par injection de pixels ou détournement de domaine (domain spoofing)",
-      "Les robots d'indexation connus et déclarés des moteurs de recherche (Googlebot)",
-      "Les rafraîchissements de page standards effectués par un utilisateur réel",
-      "Les clics accidentels répétés sur un bouton d'action mobile"
+      "Des fermes de téléphones physiques ou des serveurs automatisés simulant des clics et des impressions invisibles en arrière-plan pour siphonner le budget média",
+      "Des vrais utilisateurs qui cliquent plusieurs fois très vite sur le bouton d'allumage de la torche",
+      "Des robots de Google qui indexent le code source de l'application mobile pour le référencement",
+      "Des requêtes de serveurs météo synchronisées avec les prévisions satellites"
     ],
-    correct: 0,
-    explanation: "Le SIVT regroupe les fraudes avancées (bots mimant le comportement humain, spoofing, fermes à clics) nécessitant des analyses comportementales poussées."
+    correct: 0
   },
   {
     id: 25,
     module: "Privacy, brand safety & qualité",
-    question: "Quelle est la conséquence directe pour un DSP lorsqu'une Bid Request arrive sans consentement utilisateur pour la finalité 'Dépôt et lecture de cookies' (Purpose 1 du TCF) ?",
+    question: "En audit de conformité RGPD / ePrivacy chez Programmads, vous analysez le déclenchement des balises Floodlight sur le site d'un client e-commerce. Quelle situation constitue une infraction caractérisée passible d'une mise en demeure ?",
     options: [
-      "Le DSP ne peut ni lire ni déposer de cookie de tracking, et doit enchérir sans utiliser d'identifiant tiers",
-      "Le DSP a l'obligation légale de doubler son enchère pour compenser l'éditeur",
-      "L'impression est systématiquement annulée et le site web devient inaccessible",
-      "L'annonceur est automatiquement sanctionné financièrement par la CNIL"
+      "Déclencher les tags publicitaires du DSP et déposer des cookies marketing dès le chargement de la page d'accueil avant tout choix de l'internaute sur la CMP",
+      "Attendre le clic sur 'Tout accepter' avant d'exécuter le script de mesure d'audience",
+      "Permettre à l'internaute de refuser les traceurs publicitaires aussi facilement que de les accepter",
+      "Conserver les données de navigation anonymisées pendant une durée n'excédant pas 13 mois"
     ],
-    correct: 0,
-    explanation: "Sans consentement pour le Purpose 1, aucun stockage ni lecture de traceur n'est autorisé : la diffusion se fait à l'aveugle (cookieless)."
+    correct: 0
   }
 ];
