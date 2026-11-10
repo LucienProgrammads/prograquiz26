@@ -528,11 +528,15 @@
         </div>
     </main>
 
-    <!-- SCRIPT DES QUESTIONS -->
+    <!-- CHARGEMENT DU SCRIPT DES QUESTIONS -->
     <script src="questions.js"></script>
 
     <script>
-        const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/a/macros/programmads.com/s/AKfycbzhx9bseULtHUZBTgh_WqrKRLovUW667GDYMyCLIRNALOIFBq-IxY6dBQlxXlzQ5paG/exec";
+        // =========================================================================
+        // CONFIGURATION SUPABASE OFFICIELLE
+        // =========================================================================
+        const SUPABASE_BASE_URL = "https://mqehnocelvbnwjlxwstg.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_OjHWVysio1kmcypvdqeW4A_j0Vo5mql";
 
         let activeQuestions = [];
         let userAnswers = {};
@@ -746,9 +750,9 @@
             const resValidation = document.getElementById("resValidation");
             if (resValidation) resValidation.textContent = isPassed ? "Acquis (≥80%)" : "Non acquis (<80%)";
 
+            // Envoi des données vers Supabase
             try {
-                saveResultsToGoogleSheet({
-                    date: now,
+                saveResultsToSupabase({
                     candidate: candidate,
                     module: selectedModule,
                     score: `${correctCount}/${total}`,
@@ -761,29 +765,40 @@
             }
         }
 
-        function saveResultsToGoogleSheet(data) {
+        function saveResultsToSupabase(data) {
             const syncBox = document.getElementById("syncStatus");
             if (!syncBox) return;
 
-            if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes("example")) {
-                syncBox.innerHTML = "✓ Évaluation terminée.";
-                syncBox.className = "sync-status-box synced";
-                return;
-            }
-
             syncBox.textContent = "Enregistrement dans le suivi manager...";
 
-            fetch(GOOGLE_SHEET_WEBAPP_URL, {
+            const detailsStr = (data.details || []).map(d => 
+                `Q${d.qIndex}: [${d.isCorrect ? 'CORRECT' : 'FAUX'}] Choix: '${d.chosenAnswer}' (Attendu: '${d.correctAnswer}')`
+            ).join("\n");
+
+            fetch(`${SUPABASE_BASE_URL}/rest/v1/quiz_results`, {
                 method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
+                headers: {
+                    "apikey": SUPABASE_ANON_KEY,
+                    "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+                    "Content-Type": "application/json",
+                    "Prefer": "return=minimal"
+                },
+                body: JSON.stringify({
+                    candidate: data.candidate,
+                    module: data.module,
+                    score: data.score,
+                    percent: data.percent,
+                    status: data.status,
+                    details: detailsStr
+                })
             })
-            .then(() => {
-                syncBox.innerHTML = "✓ Évaluation transmise au tableau de bord.";
+            .then(res => {
+                if (!res.ok) throw new Error("HTTP error " + res.status);
+                syncBox.innerHTML = "✓ Évaluation enregistrée avec succès dans le tableau de bord manager.";
                 syncBox.className = "sync-status-box synced";
             })
-            .catch(() => {
+            .catch(err => {
+                console.error("Erreur enregistrement Supabase :", err);
                 syncBox.innerHTML = "✓ Évaluation terminée.";
                 syncBox.className = "sync-status-box synced";
             });
